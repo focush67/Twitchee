@@ -50,6 +50,8 @@ export async function POST(request: Request) {
   const eventType = event.type;
   const { id, username, image_url } = payload.data;
 
+  console.log({ id, username, image_url });
+
   if (eventType === "user.created") {
     await db.user.create({
       data: {
@@ -58,6 +60,7 @@ export async function POST(request: Request) {
         imageUrl: image_url,
       },
     });
+    console.log("User created");
   }
 
   if (eventType === "user.updated") {
@@ -68,6 +71,7 @@ export async function POST(request: Request) {
     });
 
     if (!currentUser) {
+      console.log("User not found to update");
       return new Response("User not found", {
         status: 404,
       });
@@ -83,6 +87,7 @@ export async function POST(request: Request) {
       },
     });
 
+    console.log("User updated");
     return new Response("User updated", {
       status: 201,
     });
@@ -94,6 +99,8 @@ export async function POST(request: Request) {
         externalUserId: id,
       },
     });
+
+    console.log("User deleted");
   }
 
   return new Response("", { status: 200 });

@@ -4,7 +4,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { ThemeProvider } from "@/providers/theme-provider";
-
+import { SidebarProvider } from "@/context/sidebar-context";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,15 +20,17 @@ export default function RootLayout({
   return (
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en">
-        <body className={inter.className}>
-          <ThemeProvider
-            attribute="class"
-            forcedTheme="dark"
-            storageKey="liveit-theme-key"
-          >
-            {children}
-          </ThemeProvider>
-        </body>
+        <SidebarProvider>
+          <body className={inter.className}>
+            <ThemeProvider
+              attribute="class"
+              forcedTheme="dark"
+              storageKey="liveit-theme-key"
+            >
+              {children}
+            </ThemeProvider>
+          </body>
+        </SidebarProvider>
       </html>
     </ClerkProvider>
   );
