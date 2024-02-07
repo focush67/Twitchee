@@ -4,7 +4,7 @@ import { db } from "../utilities/database";
 export const getSelf = async () => {
   const self = await currentUser();
   if (!self || !self.username) {
-    throw new Error("Unauthorized");
+    return null;
   }
 
   const user = await db.user.findUnique({

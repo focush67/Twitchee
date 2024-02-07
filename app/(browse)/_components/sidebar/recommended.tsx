@@ -15,7 +15,7 @@ const RecommendedUsers = ({ data }: RecommendedUsersProps) => {
   return (
     <div>
       {showLabel && (
-        <div className="pl-6 mb-4 mt-2">
+        <div className="pl-6 mb-4">
           <p className="text-sm text-muted-foreground">Recommended</p>
         </div>
       )}
@@ -25,7 +25,7 @@ const RecommendedUsers = ({ data }: RecommendedUsersProps) => {
             key={user.id}
             username={user.username}
             imageUrl={user.imageUrl}
-            isLive={true}
+            isLive={false}
           />
         ))}
       </ul>
