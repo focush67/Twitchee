@@ -12,6 +12,11 @@ export const isFollowingUser = async (id: string) => {
     if (!target) {
       throw new Error("Followed User not found");
     }
+
+    if (!self) {
+      throw new Error("Unauthorized Request");
+    }
+
     if (target.id === self.id) {
       return true;
     }
@@ -39,6 +44,10 @@ export const FollowUser = async (id: string) => {
 
   if (!target) {
     throw new Error("User to be Followed not found");
+  }
+
+  if (!self) {
+    throw new Error("Unauthorized Request");
   }
 
   if (target.id === self.id) {
@@ -73,9 +82,19 @@ export const FollowUser = async (id: string) => {
 export const getFollowedUsers = async () => {
   try {
     const self = await getSelf();
+    if (!self) {
+      throw new Error("Unauthorized Request");
+    }
     const followedUsersList = db.follow.findMany({
       where: {
         followerId: self.id,
+        following: {
+          blocking: {
+            none: {
+              blockedId: self.id,
+            },
+          },
+        },
       },
       include: {
         following: true,
@@ -98,6 +117,10 @@ export const UnfollowUser = async (id: string) => {
   if (!target) {
     console.log("Target for unfollow 404");
     throw new Error("Unfollow user not found");
+  }
+
+  if (!self) {
+    throw new Error("Unauthorized Request");
   }
 
   if (target.id === self.id) {

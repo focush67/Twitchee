@@ -2,9 +2,13 @@ import { db } from "@/utilities/database";
 import { getSelf } from "./auth-services";
 
 export const getRecommended = async () => {
-  let userId;
+  let userId: string | null;
   try {
     const self = await getSelf();
+    if (!self) {
+      console.log("Unauthorized Request");
+      return [];
+    }
     userId = self.id;
   } catch (error) {
     userId = null;
@@ -14,18 +18,44 @@ export const getRecommended = async () => {
   if (userId) {
     users = await db.user.findMany({
       where: {
-        NOT: {
-          followedBy: {
-            some: {
-              followerId: userId,
+        AND: [
+          {
+            NOT: {
+              followedBy: {
+                some: {
+                  followerId: userId,
+                },
+              },
             },
           },
-        },
+
+          {
+            NOT: {
+              blockedBy: {
+                none: {
+                  blockedId: userId,
+                },
+              },
+            },
+          },
+
+          {
+            NOT: {
+              blocking: {
+                some: {
+                  blockedId: userId,
+                },
+              },
+            },
+          },
+        ],
       },
       orderBy: {
         createdAt: "desc",
       },
     });
+
+    return users.filter((user) => user.id !== userId);
   } else {
     users = await db.user.findMany({
       orderBy: {
