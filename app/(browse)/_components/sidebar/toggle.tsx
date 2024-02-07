@@ -13,7 +13,7 @@ const Toggle = () => {
   return (
     <>
       {isOpen && (
-        <div className="sm:flex sm:items-center sm:justify-center lg:flex w-full items-center pt-4 mb-4 justify-center">
+        <div className="hidden lg:flex w-full items-center pt-4 mb-4 justify-center">
           <Hint label="Collapse" side="left" asChild>
             <Button variant="ghost" className="p-2 h-auto" onClick={onCollapse}>
               <ArrowLeftFromLine className="h-4 w-4" />
@@ -22,7 +22,7 @@ const Toggle = () => {
         </div>
       )}
       {!isOpen && (
-        <div className="p-3 pl-6 mb-2 flex items-center w-full">
+        <div className="hidden lg:flex w-full items-center pt-4 mb-4 justify-center">
           <p className="font-semibold text-primary"></p>
           <Hint label="Expand" side="right" asChild>
             <Button
