@@ -6,6 +6,7 @@ import { dark } from "@clerk/themes";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { SidebarProvider } from "@/context/sidebar-context";
 import { Toaster } from "sonner";
+import { CreatorSidebarProvider } from "@/context/creator-sidebar-context";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -22,16 +23,18 @@ export default function RootLayout({
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en">
         <SidebarProvider>
-          <body className={inter.className}>
-            <ThemeProvider
-              attribute="class"
-              forcedTheme="dark"
-              storageKey="liveit-theme-key"
-            >
-              <Toaster theme="light" position="bottom-center" />
-              {children}
-            </ThemeProvider>
-          </body>
+          <CreatorSidebarProvider>
+            <body className={inter.className}>
+              <ThemeProvider
+                attribute="class"
+                forcedTheme="dark"
+                storageKey="liveit-theme-key"
+              >
+                <Toaster theme="light" position="bottom-center" />
+                {children}
+              </ThemeProvider>
+            </body>
+          </CreatorSidebarProvider>
         </SidebarProvider>
       </html>
     </ClerkProvider>
