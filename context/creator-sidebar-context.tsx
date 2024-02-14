@@ -16,7 +16,7 @@ export const CreatorSidebarProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [collapsed, setIsCollapsed] = useState(false);
+  const [collapsed, setIsCollapsed] = useState(true);
   const onExpand = () => setIsCollapsed(false);
   const onCollapse = () => setIsCollapsed(true);
   return (

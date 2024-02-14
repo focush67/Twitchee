@@ -58,6 +58,11 @@ export async function POST(request: Request) {
         externalUserId: id,
         username: username,
         imageUrl: image_url,
+        stream: {
+          create: {
+            name: `${username}'s stream`,
+          },
+        },
       },
     });
     console.log("User created");
