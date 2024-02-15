@@ -1,13 +1,13 @@
 "use client";
 
 import { SidebarContext } from "@/context/sidebar-context";
-import { Stream, User } from "@prisma/client";
+import { User } from "@prisma/client";
 import { useContext } from "react";
 import UserItem, { UserSkeleton } from "./user-item";
 
 interface RecommendedUsersProps {
   data: (User & {
-    stream: Stream | null;
+    stream: { isLive: boolean } | null;
   })[];
 }
 
