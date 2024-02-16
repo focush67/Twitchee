@@ -1,4 +1,4 @@
-import StreamPlayer from "@/components/parts/video-components/stream-player";
+import StreamPlayer from "@/components/parts/video-components/stream";
 import { getSpecificUser } from "@/services/auth-services";
 import { currentUser } from "@clerk/nextjs";
 

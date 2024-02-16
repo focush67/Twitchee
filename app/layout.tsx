@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import { SidebarProvider } from "@/context/sidebar-context";
 import { Toaster } from "sonner";
 import { CreatorSidebarProvider } from "@/context/creator-sidebar-context";
+import { ChatSidebarProvider } from "@/context/chat-sidebar-context";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -24,16 +25,18 @@ export default function RootLayout({
       <html lang="en">
         <SidebarProvider>
           <CreatorSidebarProvider>
-            <body className={inter.className}>
-              <ThemeProvider
-                attribute="class"
-                forcedTheme="dark"
-                storageKey="liveit-theme-key"
-              >
-                <Toaster theme="light" position="bottom-center" />
-                {children}
-              </ThemeProvider>
-            </body>
+            <ChatSidebarProvider>
+              <body className={inter.className}>
+                <ThemeProvider
+                  attribute="class"
+                  forcedTheme="dark"
+                  storageKey="liveit-theme-key"
+                >
+                  <Toaster theme="light" position="bottom-center" />
+                  {children}
+                </ThemeProvider>
+              </body>
+            </ChatSidebarProvider>
           </CreatorSidebarProvider>
         </SidebarProvider>
       </html>
