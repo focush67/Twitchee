@@ -24,7 +24,7 @@ const InfoCard = ({ hostId, name, thumbnail, viewerId }: InfoCardProps) => {
           <div className="rounded-md bg-blue-600 h-auto w-auto p-2">
             <Pencil className="h-5 w-5" />
           </div>
-          <div>
+          <div className="flex flex-col flex-grow">
             <h2 className="capitalize text-sm lg:text-lg font-semibold">
               Edit Stream Info
             </h2>
@@ -34,6 +34,7 @@ const InfoCard = ({ hostId, name, thumbnail, viewerId }: InfoCardProps) => {
           </div>
           <InfoModal initialName={name} initialThumbnail={thumbnail} />
         </div>
+
         <Separator />
         <div className="p-4 lg:p-6 space-y-4">
           <div>

@@ -30,15 +30,16 @@ export const getSpecificUser = async (username: string) => {
     },
     include: {
       stream: true,
+      _count: {
+        select: {
+          followedBy: true,
+        },
+      },
     },
   });
 
   if (!user) {
-    throw new Error("User not found");
-  }
-
-  if (self.username !== user.username) {
-    throw new Error("Unauthorized");
+    return null;
   }
 
   return user;

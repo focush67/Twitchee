@@ -24,9 +24,9 @@ export const createViewerToken = async (hostId: string) => {
     throw new Error("User not found");
   }
 
-  const isBlocked = await isBlockedByUser(host.id);
+  const { blockedStatus } = (await isBlockedByUser(host.id)) || {};
 
-  if (isBlocked) {
+  if (blockedStatus) {
     throw new Error("You are blocked from watching this stream");
   }
 

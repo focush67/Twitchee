@@ -3,7 +3,7 @@
 import { useViewerToken } from "@/hooks/useViewerToken";
 import { Stream } from "@prisma/client";
 import { User } from "@prisma/client";
-import { ChatToggle, LiveKitRoom } from "@livekit/components-react";
+import { LiveKitRoom } from "@livekit/components-react";
 import Video, { VideoSkeleton } from "./video";
 import { useContext } from "react";
 import { ChatSidebarContext } from "@/context/chat-sidebar-context";
@@ -15,9 +15,10 @@ import { Button } from "@/components/ui/button";
 import randomColor from "randomcolor";
 import Header, { HeaderSkeleton } from "./header";
 import InfoCard from "./infocard";
+import AboutCard from "./about";
 
 interface StreamPlayerProps {
-  user: User & { stream: Stream | null };
+  user: User & { stream: Stream | null; _count: { followedBy: number } };
   stream: Stream;
   isFollowing: boolean;
 }
@@ -71,6 +72,13 @@ const StreamPlayer = ({ user, stream, isFollowing }: StreamPlayerProps) => {
             viewerId={identity}
             name={stream.name}
             thumbnail={stream.cover}
+          />
+          <AboutCard
+            host={user.username}
+            hostId={user.id}
+            viewerId={identity}
+            bio={user.bio}
+            followedByCount={user._count.followedBy}
           />
         </div>
 

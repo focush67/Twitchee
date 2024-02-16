@@ -18,7 +18,7 @@ const url = process.env.LIVEKIT_API_URL || "";
 const key = process.env.LIVEKIT_API_KEY || "";
 const secret = process.env.LIVEKIT_API_SECRET || "";
 
-const Room = new RoomServiceClient(url, key, secret);
+export const Room = new RoomServiceClient(url, key, secret);
 const ingressClient = new IngressClient(url);
 
 export const resetIngresses = async (hostIdentity: string) => {
@@ -41,6 +41,9 @@ export const resetIngresses = async (hostIdentity: string) => {
 
 export const createIngress = async (ingressType: IngressInput) => {
   const self = await getSelf();
+  if (!self) {
+    console.log("Unauthorized Request as self was not found");
+  }
 
   await resetIngresses(self?.id!);
 

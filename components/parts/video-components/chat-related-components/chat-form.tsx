@@ -36,7 +36,7 @@ const ChatForm = ({
     e.stopPropagation();
 
     if (!value || isDisabled) return;
-    if (isDelayed && delayBlocked) {
+    if (isDelayed || delayBlocked) {
       setDelayBlocked(true);
       setTimeout(() => {
         setDelayBlocked(false);

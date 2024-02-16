@@ -38,8 +38,8 @@ const ConnectModal = ({}: ConnectModalProps) => {
   const onSubmit = () => {
     startTransition(() => {
       createIngress(parseInt(iType))
-        .then(() => {
-          toast.success("Ingress created");
+        .then((data) => {
+          toast.success(`Ingress created`);
           closeModalRef?.current?.click();
         })
         .catch(() => toast.error("Failed to create Ingress"));

@@ -46,16 +46,19 @@ const Actions = ({ isFollowing, hostId, isHost }: ActionsProps) => {
     }
 
     if (isFollowing) {
-      followHost();
-    } else {
       unfollowHost();
+    } else {
+      followHost();
     }
   };
 
   return (
     <Button
       disabled={isPending || isHost}
-      className="w-full lg:w-auto"
+      className={cn(
+        "w-full lg:w-auto",
+        isFollowing ? "bg-red-800" : "bg-blue-700"
+      )}
       size={"sm"}
       onClick={handleRelationship}
       variant={"primary"}
