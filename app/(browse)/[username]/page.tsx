@@ -6,6 +6,7 @@ import { isBlockedByUser } from "@/services/blocking-service";
 import { getSelf, getSpecificUser } from "@/services/auth-services";
 import StreamPlayer from "@/components/parts/video-components/stream";
 import { currentUser } from "@clerk/nextjs";
+
 interface UserProps {
   params: {
     username: string;

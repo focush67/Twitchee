@@ -27,6 +27,8 @@ export const onBlock = async (id: string) => {
   } catch (error) {}
   revalidatePath("/");
   revalidatePath(`/u/${self.username}/community`);
+
+  return blockedUser;
 };
 
 export const onUnBlock = async (id: string) => {

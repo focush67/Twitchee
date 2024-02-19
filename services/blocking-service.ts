@@ -135,3 +135,22 @@ export const UnBlockUser = async (id: string) => {
 
   return unblock;
 };
+
+export const getAllBlockedUsers = async () => {
+  const self = await getSelf();
+  if (!self) {
+    console.log("Login required for fetching all blocked users, aborting");
+    return [];
+  }
+
+  const blockedUsers = await db.block.findMany({
+    where: {
+      blockerId: self?.id,
+    },
+    include: {
+      blocked: true,
+    },
+  });
+
+  return blockedUsers;
+};

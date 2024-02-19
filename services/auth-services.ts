@@ -28,11 +28,26 @@ export const getSpecificUser = async (username: string) => {
     where: {
       username,
     },
-    include: {
-      stream: true,
+    select: {
+      id: true,
+      externalUserId: true,
+      username: true,
+      bio: true,
+      imageUrl: true,
       _count: {
         select: {
           followedBy: true,
+        },
+      },
+      stream: {
+        select: {
+          id: true,
+          isLive: true,
+          isChatDelayed: true,
+          isChatEnabled: true,
+          isChatPrivate: true,
+          cover: true,
+          name: true,
         },
       },
     },

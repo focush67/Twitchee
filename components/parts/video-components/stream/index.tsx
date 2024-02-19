@@ -17,9 +17,31 @@ import Header, { HeaderSkeleton } from "./header";
 import InfoCard from "./infocard";
 import AboutCard from "./about";
 
+interface CustomStreamProps {
+  id: string;
+  isChatEnabled: boolean;
+  isChatDelayed: boolean;
+  isChatPrivate: boolean;
+  isLive: boolean;
+  cover: string | null;
+  name: string;
+}
+
+interface CustomUser {
+  id: string;
+  username: string;
+  bio: string | null;
+  stream: CustomStreamProps | null;
+  imageUrl: string;
+  _count: { followedBy: number };
+}
+
 interface StreamPlayerProps {
-  user: User & { stream: Stream | null; _count: { followedBy: number } };
-  stream: Stream;
+  user: CustomUser & {
+    stream: CustomStreamProps | null;
+    _count: { followedBy: number };
+  };
+  stream: CustomStreamProps;
   isFollowing: boolean;
 }
 
