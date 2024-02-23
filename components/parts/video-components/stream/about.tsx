@@ -31,7 +31,7 @@ const About = ({
             About {host}
             <VerifiedMark />
           </div>
-          <div>{isHost && <BioModal />}</div>
+          <div>{isHost && <BioModal initial={bio} />}</div>
         </div>
 
         <div className="text-sm text-muted-foreground">
