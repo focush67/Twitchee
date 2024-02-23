@@ -1,5 +1,8 @@
 import { redirect } from "next/navigation";
-import SearchResults from "./_components/search-results";
+import SearchResults, {
+  SearchResultsSkeleton,
+} from "./_components/search-results";
+import { Suspense } from "react";
 
 interface SearchPageProps {
   searchParams: {
@@ -14,7 +17,9 @@ const SearchPage = ({ searchParams }: SearchPageProps) => {
   }
   return (
     <div className="h-full p-8 max-w-screen-2xl mx-auto">
-      <SearchResults term={term} />
+      <Suspense fallback={<SearchResultsSkeleton />}>
+        <SearchResults term={term} />
+      </Suspense>
     </div>
   );
 };

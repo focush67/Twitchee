@@ -2,6 +2,7 @@ import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { db } from "@/utilities/database";
+import { resetIngresses } from "@/server_actions/ingress";
 
 export async function POST(request: Request) {
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
@@ -69,6 +70,7 @@ export async function POST(request: Request) {
   }
 
   if (eventType === "user.updated") {
+    await resetIngresses(payload.data.id);
     const currentUser = await db.user.findUnique({
       where: {
         externalUserId: id,

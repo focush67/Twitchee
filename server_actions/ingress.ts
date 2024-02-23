@@ -18,7 +18,7 @@ const url = process.env.LIVEKIT_API_URL || "";
 const key = process.env.LIVEKIT_API_KEY || "";
 const secret = process.env.LIVEKIT_API_SECRET || "";
 
-export const Room = new RoomServiceClient(url, key, secret);
+const Room = new RoomServiceClient(url, key, secret);
 const ingressClient = new IngressClient(url);
 
 export const resetIngresses = async (hostIdentity: string) => {
